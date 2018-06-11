@@ -10,7 +10,6 @@ import ConvertJSONToYAMLCommand from './command/ConvertJSONToYAML';
 
 const EDITOR_START_POSITION = new vscode.Position(0, 0);
 
-
 /**
  * The editor interface represents an object that modifies content and
  * returns the result of it's modifications.
@@ -21,6 +20,7 @@ interface Editor {
 
 /**
  * Obtain the end position of the editor from it's current content.
+ * 
  * @param editor The editor that has the content.
  */
 function getEditorEndPosition(editor: vscode.TextEditor): vscode.Position {
@@ -29,8 +29,6 @@ function getEditorEndPosition(editor: vscode.TextEditor): vscode.Position {
 	const lastLineLength = content.length - content.lastIndexOf('\n') - 1;
 	return new vscode.Position(lineCount, lastLineLength);
 }
-
-
 
 /**
  * A function that takes the content of the active editor and replaces it with 
@@ -60,7 +58,9 @@ function editActiveContent(contentEditor: Editor) {
 
             editBuilder.replace(fullRange, result);
         }).then((success) => {
-            // TODO: 
+			if (!success) {
+				vscode.window.showErrorMessage("could not perform edit");
+			}
         });
     } catch(err) {
         vscode.window.showErrorMessage(err.toLocaleString());
