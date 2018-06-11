@@ -11,4 +11,7 @@ export default class PrettifyJSONCommand {
 	prettify(rawJSON: string): string {
 		return JSON.stringify(JSON.parse(rawJSON), null, this.indentDepth);
 	}
+
+	// satisfy the editor interface
+	edit(content: string): string { return this.prettify(content); }
 }

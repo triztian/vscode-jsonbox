@@ -21,6 +21,9 @@ class PrettifyEscapedJSONCommand extends PrettifyJSONCommand {
 
 		return super.prettify(cleaned);
 	}
+
+	// satisfy the editor interface.
+	edit(content: string): string { return this.prettify(content); }
 }
 
 export default PrettifyEscapedJSONCommand;

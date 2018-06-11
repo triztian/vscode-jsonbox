@@ -8,11 +8,13 @@
         "vscode": "^1.24.0"
     },
     "categories": [
-        "Other"
+		"Formatters",
+		"Linters"
     ],
     "activationEvents": [
         "onCommand:jsonbox.prettifyJSON",
-        "onCommand:jsonbox.prettifyEscapedJSON"
+        "onCommand:jsonbox.prettifyEscapedJSON",
+        "onCommand:jsonbox.convertJSONtoYAML"
     ],
     "main": "./out/extension",
     "contributes": {
@@ -24,6 +26,10 @@
             {
                 "command": "jsonbox.prettifyEscapedJSON",
                 "title": "JSONBox: Prettify Escaped JSON"
+            },
+            {
+                "command": "jsonbox.convertJSONtoYAML",
+                "title": "JSONBox: Convert JSON to YAML"
             }
         ]
     },
@@ -42,6 +48,7 @@
         "@types/mocha": "^2.2.42"
     },
     "dependencies": {
+        "@types/js-yaml": "^3.11.1",
         "js-yaml": "^3.12.0"
     }
 }
