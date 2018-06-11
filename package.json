@@ -14,7 +14,8 @@
     "activationEvents": [
         "onCommand:jsonbox.prettifyJSON",
         "onCommand:jsonbox.prettifyEscapedJSON",
-        "onCommand:jsonbox.convertJSONtoYAML"
+        "onCommand:jsonbox.convertJSONtoYAML",
+        "onCommand:jsonbox.convertYAMLtoJSON"
     ],
     "main": "./out/extension",
     "contributes": {
@@ -30,6 +31,10 @@
             {
                 "command": "jsonbox.convertJSONtoYAML",
                 "title": "JSONBox: Convert JSON to YAML"
+            },
+            {
+                "command": "jsonbox.convertYAMLtoJSON",
+                "title": "JSONBox: Convert YAML to JSON"
             }
         ]
     },

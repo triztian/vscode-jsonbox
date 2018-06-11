@@ -5,18 +5,23 @@ import * as vscode from 'vscode';
 
 import PrettifyJSONCommand from './command/PrettifyJSON';
 import PrettifyEscapedJSONCommand from './command/PrettifyEscapedJSON';
-import ConvertToYAMLCommand from './command/ConvertJSONToYAML';
+import ConvertYAMLToJSONCommand from './command/ConvertYAMLToJSON';
+import ConvertJSONToYAMLCommand from './command/ConvertJSONToYAML';
 
 const EDITOR_START_POSITION = new vscode.Position(0, 0);
 
 
+/**
+ * The editor interface represents an object that modifies content and
+ * returns the result of it's modifications.
+ */
 interface Editor {
     edit(content: string): string;
 }
 
 /**
- * 
- * @param editor 
+ * Obtain the end position of the editor from it's current content.
+ * @param editor The editor that has the content.
  */
 function getEditorEndPosition(editor: vscode.TextEditor): vscode.Position {
 	const content = editor.document.getText();
@@ -75,8 +80,12 @@ export function activate(context: vscode.ExtensionContext) {
         editActiveContent(new PrettifyJSONCommand());
     }));
 
-    context.subscriptions.push(vscode.commands.registerCommand(ConvertToYAMLCommand.COMMAND_ID, () => {
-        editActiveContent(new ConvertToYAMLCommand());
+    context.subscriptions.push(vscode.commands.registerCommand(ConvertJSONToYAMLCommand.COMMAND_ID, () => {
+        editActiveContent(new ConvertJSONToYAMLCommand());
+	}));
+
+    context.subscriptions.push(vscode.commands.registerCommand(ConvertYAMLToJSONCommand.COMMAND_ID, () => {
+        editActiveContent(new ConvertYAMLToJSONCommand());
     }));
 }
 
