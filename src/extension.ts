@@ -23,8 +23,7 @@ interface Editor {
  * 
  * @param editor The editor that has the content.
  */
-function getEditorEndPosition(editor: vscode.TextEditor): vscode.Position {
-	const content = editor.document.getText();
+function getContentEndPosition(content: string): vscode.Position {
 	const lineCount = (content.match(/\n/g) || []).length;
 	const lastLineLength = content.length - content.lastIndexOf('\n') - 1;
 	return new vscode.Position(lineCount, lastLineLength);
@@ -43,13 +42,12 @@ function editActiveContent(contentEditor: Editor) {
             throw new Error("could not get active editor");
 		}
 
+		const contentEndPosition = getContentEndPosition(activeEditor.document.getText());
+
         let result = contentEditor.edit(activeEditor.document.getText());
-		const contentEndPosition = getEditorEndPosition(activeEditor);
 
         activeEditor.edit(editBuilder => {
-            const lineCount = (result.match(/\n/g) || []).length;
-			const lastLineLength = result.length - result.lastIndexOf("\n") - 1;
-			const resultEndPosition = new vscode.Position(lineCount, lastLineLength);
+			const resultEndPosition = getContentEndPosition(result);
 
             let fullRange = new vscode.Range(EDITOR_START_POSITION, resultEndPosition);
 			if  (resultEndPosition.isBefore(contentEndPosition)) {
