@@ -2,6 +2,11 @@
     "name": "vscode-jsonbox",
     "displayName": "vscode-jsonbox",
     "description": "Manipulate JSON in various forms and to different formats",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/triztian/vscode-jsonbox"
+	},
     "version": "0.0.1",
     "publisher": "aztristian",
     "engines": {
